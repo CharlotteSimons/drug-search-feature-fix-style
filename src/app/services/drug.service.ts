@@ -1,19 +1,14 @@
-// aanroepen van data files in assets
+// src/app/services/drug.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-interface Drug {
+export interface Drug {
   main_drug: string;
-  // Voeg andere relevante properties toe
+  [key: string]: string; // Dit vangt alle andere properties op zoals '0', '1', etc.
 }
 
-interface Gene {
-  gene_name: string;
-  // Voeg andere relevante properties toe
-}
-
-interface DrugTarget {
+export interface DrugTarget {
   target_name: string;
   // Voeg andere relevante properties toe
 }
@@ -26,10 +21,6 @@ export class DrugsService {
 
   getDrugs(): Observable<Drug[]> {
     return this.http.get<Drug[]>('assets/unapproved.json');
-  }
-
-  getGenes(): Observable<Gene[]> {
-    return this.http.get<Gene[]>('assets/Gene.json');
   }
 
   getDrugTargets(): Observable<DrugTarget[]> {
